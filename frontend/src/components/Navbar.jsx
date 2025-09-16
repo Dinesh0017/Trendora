@@ -35,7 +35,7 @@ const Navbar = () => {
                 <>
                   {link.label}
                   <span
-                    className={`block h-[3px] bg-amber-500 transition-all duration-300 origin-left rounded-2xl ${
+                    className={`block h-[3px] bg-amber-500 transition-all duration-500 origin-left rounded-2xl ${
                       isActive
                         ? "w-full scale-x-100 opacity-100"
                         : "w-full scale-x-0 opacity-0"
