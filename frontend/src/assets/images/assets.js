@@ -58,6 +58,9 @@ import p_img52 from './p_img52.png'
 import logot from '../icons/Trendora_t.png'
 import logob from '../icons/Trendora_b.png'
 import hero_img from './hero_img.png'
+import hero2 from './hero2.png'
+import hero3 from './hero3.png'
+import hero4 from './hero4.png'
 import cart_icon from '../icons/cart_icon.png'
 import bin_icon from '../icons/bin_icon.png'
 import dropdown_icon from '../icons/dropdown_icon.png'
@@ -75,10 +78,14 @@ import razorpay_logo from '../icons/razorpay_logo.png'
 import stripe_logo from '../icons/stripe_logo.png'
 import cross_icon from '../icons/cross_icon.png'
 
+
 export const assets = {
     logot,
     logob,
     hero_img,
+    hero2,
+    hero3,
+    hero4,
     cart_icon,
     dropdown_icon,
     exchange_icon,

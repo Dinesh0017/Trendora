@@ -13,12 +13,12 @@ const Navbar = () => {
   const [visible, setVisible] = useState(false);
 
   return (
-    <div className="flex items-center justify-between py-5 font-medium relative">
+    <div className="flex items-center justify-between py-5 font-medium relative ">
       {/* Logo */}
       <img src={assets.logot} alt="Trendora Logo" className="w-32 h-auto" />
 
       {/* Desktop Links */}
-      <ul className="hidden sm:flex gap-5 text-sm text-gray-700">
+      <ul className="hidden sm:flex gap-5 text-md text-gray-700">
         {navLinks.map((link) => (
           <li key={link.to}>
             <NavLink
