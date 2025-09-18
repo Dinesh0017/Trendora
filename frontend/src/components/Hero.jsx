@@ -8,32 +8,6 @@ const Hero = () => {
       <div className="max-w-7xl mx-auto px-6 lg:px-12">
         {/* Top Product Grid */}
         <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-6 mb-12">
-          {/* Big Featured Product */}
-          <div className="sm:col-span-2 lg:col-span-2 relative rounded-2xl overflow-hidden shadow-md group">
-            <img
-              src={assets.hero2}
-              alt="Elegance Embodied Dress"
-              className="w-full h-[360px] object-cover group-hover:scale-105 transition-transform duration-500"
-            />
-            <div className="absolute bottom-4 left-4 bg-white/80 backdrop-blur px-4 py-2 rounded-xl">
-              <h3 className="font-semibold text-gray-800">
-                Elegance Embodied Dress
-              </h3>
-              <p className="text-gray-600 text-sm">$199.99</p>
-            </div>
-          </div>
-
-          {/* Highlight Card */}
-          <div className="bg-amber-200 rounded-2xl flex flex-col justify-center items-center text-center p-6 shadow-md">
-            <h3 className="font-bold text-gray-900 text-lg">
-              Comprehensive Guide
-            </h3>
-            <p className="text-gray-600 text-sm mb-3">
-              To The World Of Fashion
-            </p>
-            <span className="text-2xl font-bold text-amber-600">1000+</span>
-          </div>
-
           {/* Two Small Products */}
           <div className="grid gap-6">
             <div className="relative rounded-2xl overflow-hidden shadow-md group">
@@ -61,6 +35,32 @@ const Hero = () => {
                 </p>
                 <span className="text-xs text-gray-600">$149.99</span>
               </div>
+            </div>
+          </div>
+
+          {/* Highlight Card */}
+          <div className="bg-amber-200 rounded-2xl flex flex-col justify-center items-center text-center p-6 shadow-md">
+            <h3 className="font-bold text-gray-900 text-lg">
+              Comprehensive Guide
+            </h3>
+            <p className="text-gray-600 text-sm mb-3">
+              To The World Of Fashion
+            </p>
+            <span className="text-2xl font-bold text-amber-600">1000+</span>
+          </div>
+
+          {/* Big Featured Product */}
+          <div className="sm:col-span-2 lg:col-span-2 relative rounded-2xl overflow-hidden shadow-md group">
+            <img
+              src={assets.hero2}
+              alt="Elegance Embodied Dress"
+              className="w-full h-[360px] object-cover group-hover:scale-105 transition-transform duration-500"
+            />
+            <div className="absolute bottom-4 left-4 bg-white/80 backdrop-blur px-4 py-2 rounded-xl">
+              <h3 className="font-semibold text-gray-800">
+                Elegance Embodied Dress
+              </h3>
+              <p className="text-gray-600 text-sm">$199.99</p>
             </div>
           </div>
         </div>
