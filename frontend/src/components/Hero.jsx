@@ -68,7 +68,7 @@ const Hero = () => {
         {/* Bottom Hero Text */}
         <div className="w-full flex flex-col lg:flex-row items-center lg:items-start justify-between gap-6 text-center lg:text-left">
           <div className="space-y-2">
-            <h1 className="font-cormorant text-3xl md:text-5xl font-bold text-gray-900">
+            <h1 className="bodoni-moda text-3xl md:text-5xl font-bold text-gray-900">
               Harmonizing Your Style <br /> and Craftsmanship
             </h1>
           </div>
