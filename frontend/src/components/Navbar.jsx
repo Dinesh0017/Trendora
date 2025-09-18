@@ -15,8 +15,9 @@ const Navbar = () => {
   return (
     <div className="flex items-center justify-between py-5 font-medium relative ">
       {/* Logo */}
-      <img src={assets.logot} alt="Trendora Logo" className="w-32 h-auto" />
-
+      <Link to="/">
+        <img src={assets.logot} alt="Trendora Logo" className="w-32 h-auto" />
+      </Link>
       {/* Desktop Links */}
       <ul className="hidden sm:flex gap-5 text-md text-gray-700">
         {navLinks.map((link) => (
