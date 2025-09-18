@@ -79,6 +79,9 @@ import stripe_logo from '../icons/stripe_logo.png'
 import cross_icon from '../icons/cross_icon.png'
 import shipping_icon from '../icons/shipping_icon.png'
 import secure_icon from '../icons/secure_icon.png'
+import visa_img from '../icons/visa_img.png'
+import masterCard_img from '../icons/masterCard_img.png'
+import paypal_img from '../icons/paypal_img.png'
 
 
 export const assets = {
@@ -91,6 +94,9 @@ export const assets = {
     cart_icon,
     dropdown_icon,
     exchange_icon,
+    visa_img,
+    masterCard_img,
+    paypal_img,
     profile_icon,
     quality_icon,
     secure_icon,
