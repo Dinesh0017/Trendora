@@ -1,6 +1,6 @@
 import React, { useEffect, useState, useContext } from "react";
-import { ShopContext } from "../context/ShopContext";
 import Title from "./Title";
+import { ShopContext } from "../context/ShopContext";
 import ProductItem from "./ProductItem";
 
 const LatestCollection = () => {
@@ -11,7 +11,7 @@ const LatestCollection = () => {
     if (products && products.length > 0) {
       setLatestProducts(products.slice(0, 10));
     }
-  }, [products]); // ✅ runs whenever products change
+  }, [products]);
 
   return (
     <div className="my-12">
@@ -26,10 +26,10 @@ const LatestCollection = () => {
 
       {/* Products Grid */}
       <div className="grid grid-cols-2 sm:grid-cols-3 md:grid-cols-4 lg:grid-cols-5 gap-4 sm:gap-6">
-        {latestProducts.map((item) => (
+        {latestProducts.map((item,index) => (
           <ProductItem
-            key={item.id}
-            id={item.id}
+            key={index}
+            id={item._id}
             image={item.image}
             name={item.name}
             price={item.price}
