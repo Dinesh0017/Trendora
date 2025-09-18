@@ -24,7 +24,7 @@ const ProductItem = ({ id, image, name, price }) => {
 
       {/* Product Info */}
       <div className="p-4 flex flex-col flex-1 justify-between">
-        <h3 className="text-sm sm:text-base md:text-lg font-medium text-gray-800 group-hover:text-amber-600 transition-colors line-clamp-1">
+        <h3 className="text-sm sm:text-base md:text-lg font-medium text-gray-800 group-hover:text-amber-500 transition-colors line-clamp-1">
           {name}
         </h3>
 

@@ -46,7 +46,7 @@ const Hero = () => {
             <p className="text-gray-600 text-sm mb-3">
               To The World Of Fashion
             </p>
-            <span className="text-2xl font-bold text-amber-600">1000+</span>
+            <span className="text-2xl font-bold text-amber-500">1000+</span>
           </div>
 
           {/* Big Featured Product */}
