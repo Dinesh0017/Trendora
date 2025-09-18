@@ -6,10 +6,6 @@ a.active hr{
     display: block;
 }
 
-*{
-    font-family: Outfit;
-}
-
 .bodoni-moda {
   font-family: "Bodoni Moda", serif;
   font-optical-sizing: auto;

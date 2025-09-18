@@ -77,6 +77,8 @@ import contact_img from './contact_img.png'
 import razorpay_logo from '../icons/razorpay_logo.png'
 import stripe_logo from '../icons/stripe_logo.png'
 import cross_icon from '../icons/cross_icon.png'
+import shipping_icon from '../icons/shipping_icon.png'
+import secure_icon from '../icons/secure_icon.png'
 
 
 export const assets = {
@@ -91,6 +93,8 @@ export const assets = {
     exchange_icon,
     profile_icon,
     quality_icon,
+    secure_icon,
+    shipping_icon,
     search_icon,
     star_dull_icon,
     star_icon,

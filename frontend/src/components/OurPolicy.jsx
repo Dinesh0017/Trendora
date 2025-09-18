@@ -1,29 +1,62 @@
-import React from 'react'
-import { assets } from '../assets/images/assets'
+import React from "react";
+import { assets } from "../assets/images/assets";
 
 const OurPolicy = () => {
+  const policies = [
+    {
+      id: 1,
+      icon: assets.exchange_icon,
+      title: "Easy Exchange",
+      desc: "Enjoy hassle-free product exchanges anytime.",
+    },
+    {
+      id: 2,
+      icon: assets.quality_icon,
+      title: "7-Day Returns",
+      desc: "Return products within 7 days with no extra charges.",
+    },
+    {
+      id: 3,
+      icon: assets.support_img,
+      title: "24/7 Support",
+      desc: "Our support team is always available to assist you.",
+    },
+    {
+      id: 4,
+      icon: assets.shipping_icon,
+      title: "Fast Delivery",
+      desc: "Quick & reliable shipping across all regions.",
+    },
+    {
+      id: 5,
+      icon: assets.secure_icon,
+      title: "Secure Payments",
+      desc: "All transactions are encrypted & 100% safe.",
+    },
+  ];
+
   return (
-    <div className='flex flex-col sm:flex-row justify-around gap-12 sm:gap-2 text-center py-20 text-xs sm:text-sm md:text-base text-gray-700'>
-        <div classname='flex flex-col items-center gap-4 px-4 sm:px-0'>
-            <img className='w-12 m-auto mb-5' alt="" src={assets.exchange_icon}/>
-            <p className='font-semibold'>Easy Exchange Policy</p>
-            <p className='text-gray-400'>We offer hassle-free exchange policy</p>
-        </div>
+    <section className="bg-gray-50 py-16 px-6 sm:px-10 lg:px-20">
+      <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-5 gap-10">
+        {policies.map((policy) => (
+          <div
+            key={policy.id}
+            className="flex flex-col items-center bg-white rounded-2xl shadow-md hover:shadow-xl transition-all duration-300 p-6 text-center"
+          >
+            <img
+              className="w-14 h-14 mb-4"
+              src={policy.icon}
+              alt={policy.title}
+            />
+            <h3 className="text-base sm:text-lg font-semibold text-gray-800 mb-2">
+              {policy.title}
+            </h3>
+            <p className="text-sm text-gray-500">{policy.desc}</p>
+          </div>
+        ))}
+      </div>
+    </section>
+  );
+};
 
-        <div classname='flex flex-col items-center gap-4 px-4 sm:px-0'>
-            <img className='w-12 m-auto mb-5' alt="" src={assets.quality_icon}/>
-            <p className='font-semibold'>7 Days Return Policy</p>
-            <p className='text-gray-400'>We offer a 7-day return policy for all our products.</p>
-        </div>
-
-        <div classname='flex flex-col items-center gap-4 px-4 sm:px-0'>
-            <img className='w-12 m-auto mb-5' alt="" src={assets.support_img}/>
-            <p className='font-semibold'>Best Customer Support</p>
-            <p className='text-gray-400'>Our support team is available 24/7 to assist you.</p>
-        </div>
-      
-    </div>
-  )
-}
-
-export default OurPolicy
+export default OurPolicy;
