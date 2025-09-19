@@ -6,12 +6,16 @@ import ProductItem from "../components/ProductItem";
 
 const Collection = () => {
   const { products } = useContext(ShopContext);
+
+  // States for filters & sorting
   const [showFilter, setShowFilter] = useState(false);
-  const [filterProducts, setFilterProducts] = useState([]);
-  const [category, setCategory] = useState([]);
-  const [subCategory, setSubCategory] = useState([]);
+  const [filterProducts, setFilterProducts] = useState([]); // filtered products
+  const [category, setCategory] = useState([]); // selected categories
+  const [subCategory, setSubCategory] = useState([]); // selected subcategories
+  const [sortType, setSortType] = useState('relevant'); // default sort
 
 
+   // Toggle category checkboxes
   const toggleCategory = (e) => {
     if (category.includes(e.target.value)) {
       setCategory(prev=>prev.filter(item => item !== e.target.value));
@@ -19,7 +23,8 @@ const Collection = () => {
       setCategory(prev=>[...prev, e.target.value]);
     }
   }
-
+  //  Toggle subcategory checkboxes
+  //  Toggle subcategory checkboxes
   const toggleSubCategory = (e) =>{
     if (subCategory.includes(e.target.value)) {
       setSubCategory(prev=>prev.filter(item => item !== e.target.value));
@@ -27,23 +32,58 @@ const Collection = () => {
       setSubCategory(prev=>[...prev, e.target.value]);
     }
   }
-/*
+
+
+  // Filter products based on selected category & subCategory
   const applyFilter = () =>{
     let productsCopy = products.slice()
 
     if (category.length > 0){
-      productsCopy =
+      productsCopy = productsCopy.filter(item => category.includes(item.category));
     }
-  }*/
+    if (subCategory.length > 0){
+      productsCopy = productsCopy.filter(item => subCategory.includes(item.subCategory));
+    }
 
+    setFilterProducts(productsCopy);
+  }
+
+
+  // Sort products based on sortType
+  const sortProduct = () => {
+    let fpCopy = filterProducts.slice();
+
+    switch (sortType){
+      case 'low-high':
+        setFilterProducts(fpCopy.sort((a, b) => a.price - b.price));
+        break;
+      case 'high-low':
+        setFilterProducts(fpCopy.sort((a, b) => b.price - a.price));
+        break;
+      default:
+        setFilterProducts(fpCopy); // "relevant" → just keep current filtered list
+        break;
+    }
+  }
+
+  // Run filter whenever category/subCategory changes
   useEffect(() => {
-      setFilterProducts(products);
+    applyFilter()
+  },[category,subCategory])
+
+  // Run sorting whenever sort type changes
+  useEffect(() => {
+    sortProduct();
+  }, [sortType]);
+
+
+  // Set initial products on first load
+  useEffect(() => {
+    setFilterProducts(products);
   }, [products]);
 
-
-
   return (
-    <div className="flex flex-col sm:flex-row gap-10 pt-10 border-t">
+    <div className="flex flex-col sm:flex-row gap-10 pt-10">
       {/* FILTER SIDEBAR */}
       <aside className="min-w-[250px]">
         <p
@@ -118,7 +158,7 @@ const Collection = () => {
       <main className="flex-1">
         <div className="flex flex-col sm:flex-row justify-between items-center mb-6 gap-4 text-md">
           <Title text1="ALL" text2="COLLECTIONS" />
-          <select className="border border-gray-300 rounded-lg p-2 text-gray-700 hover:border-gray-500 focus:outline-none focus:ring-2 focus:ring-amber-400 transition">
+          <select onChange={(e) => setSortType(e.target.value)} className="border border-gray-300 rounded-lg p-2 text-gray-700 hover:border-gray-500 focus:outline-none focus:ring-2 focus:ring-amber-400 transition">
             <option value="relevant">Sort by Relevant</option>
             <option value="low-high">Price: Low to High</option>
             <option value="high-low">Price: High to Low</option>
