@@ -5,7 +5,7 @@ import { assets } from "../assets/images/assets";
 import CartTotal from "../components/CartTotal";
 
 const Cart = () => {
-  const { products, currency, cartItems, updateQuantity } =
+  const { products, currency, cartItems, updateQuantity, navigate } =
     useContext(ShopContext);
   const [cartData, setCartData] = useState([]);
 
@@ -105,7 +105,7 @@ const Cart = () => {
 
         {/* Checkout Button */}
         <div className="w-full sm:w-auto">
-          <button className="bg-amber-500 hover:bg-amber-600 cursor-pointer text-white text-base font-semibold tracking-wide rounded-xl shadow-md transition-all duration-300 px-8 py-3 w-full sm:w-auto">
+          <button onClick={() => navigate("/place-order")} className="bg-amber-500 hover:bg-amber-600 cursor-pointer text-white text-base font-semibold tracking-wide rounded-xl shadow-md transition-all duration-300 px-8 py-3 w-full sm:w-auto">
             PROCEED TO CHECKOUT
           </button>
         </div>
