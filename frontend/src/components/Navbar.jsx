@@ -1,7 +1,7 @@
 import React, { useContext, useState } from "react";
 import { Link, NavLink } from "react-router-dom";
 import { assets } from "../assets/images/assets.js";
-import { ShopContext } from "../context/ShopContext.jsx";
+import { ShopContext } from "../context/shopContext.jsx";
 
 const navLinks = [
   { to: "/", label: "Home" },
@@ -12,7 +12,7 @@ const navLinks = [
 
 const Navbar = () => {
   const [visible, setVisible] = useState(false);
-  const {setShowSearch, getCartCount} = useContext(ShopContext);
+  const { setShowSearch, getCartCount } = useContext(ShopContext);
 
   return (
     <div className="flex items-center justify-between py-5 font-medium relative ">
@@ -55,7 +55,7 @@ const Navbar = () => {
       <div className="flex items-center gap-6">
         {/* Search */}
         <img
-          onClick={()=>setShowSearch(true)}
+          onClick={() => setShowSearch(true)}
           src={assets.search_icon}
           alt="Search"
           className="w-5 cursor-pointer"
@@ -63,11 +63,13 @@ const Navbar = () => {
 
         {/* Profile Dropdown */}
         <div className="group relative">
-          <img
-            src={assets.profile_icon}
-            alt="User"
-            className="w-5 cursor-pointer"
-          />
+          <Link to='/login'>
+            <img
+              src={assets.profile_icon}
+              alt="User"
+              className="w-5 cursor-pointer"
+            />
+          </Link>
           <div className="absolute right-0 hidden group-hover:block bg-white shadow-lg rounded-lg pt-4">
             <ul className="flex flex-col gap-2 w-36 py-3 px-5 bg-slate-100 text-gray-500 rounded">
               <li className="cursor-pointer hover:text-amber-500">
