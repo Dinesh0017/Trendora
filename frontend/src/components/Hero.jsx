@@ -1,10 +1,10 @@
 import React from "react";
 import { Link } from "react-router-dom";
-import { assets } from "../assets/images/assets"; // replace with actual images
+import { assets } from "../assets/images/assets";
 
 const Hero = () => {
   return (
-    <section className="bg-white">
+    <section className="bg-white mt-6">
       <div className="max-w-7xl mx-auto px-6 lg:px-12">
         {/* Top Product Grid */}
         <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-6 mb-12">
