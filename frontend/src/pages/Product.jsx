@@ -91,7 +91,7 @@ const Product = () => {
                 <button
                   onClick={() => setSize(item)}
                   key={index}
-                  className={`border py-2 px-4 rounded-lg text-sm transition-all ${
+                  className={`border py-2 px-4 rounded-lg text-sm transition-all cursor-pointer ${
                     item === size
                       ? "border-amber-500 bg-amber-50 text-amber-700 shadow"
                       : "border-gray-300 bg-gray-100 hover:border-amber-400"
@@ -104,7 +104,7 @@ const Product = () => {
           </div>
 
           {/* Add to Cart */}
-          <button onClick={() => addToCart(productData._id, size)} className="bg-amber-600 hover:bg-amber-700 text-white px-8 py-3 rounded-lg text-sm font-medium transition-all duration-300">
+          <button onClick={() => addToCart(productData._id, size)} className="bg-amber-600 hover:bg-amber-700 text-white px-8 py-3 rounded-lg text-sm font-medium transition-all duration-300 cursor-pointer">
             Add to Cart
           </button>
 

@@ -1,7 +1,7 @@
 import React, { useContext, useState } from "react";
 import { Link, NavLink } from "react-router-dom";
 import { assets } from "../assets/images/assets.js";
-import { ShopContext } from "../context/shopContext.jsx";
+import { ShopContext } from "../context/ShopContext.js";
 
 const navLinks = [
   { to: "/", label: "Home" },
