@@ -26,7 +26,7 @@ const NewsletterBox = () => {
         />
         <button
           type="submit"
-          className="bg-amber-500 text-white px-6 py-3 rounded-md sm:rounded-l-none sm:rounded-r-md font-semibold hover:bg-amber-600 transition-all duration-300 shadow-md w-full sm:w-auto"
+          className="bg-amber-500 text-white px-6 py-3 rounded-md sm:rounded-l-none sm:rounded-r-md font-semibold hover:bg-amber-600 transition-all duration-300 shadow-md w-full sm:w-auto cursor-pointer"
         >
           Subscribe
         </button>

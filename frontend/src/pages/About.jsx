@@ -26,31 +26,31 @@ const About = () => {
   {/* About Content */}
   <div className="flex flex-col justify-center gap-6 text-gray-600">
     <p className="leading-relaxed">
-      Forever was founded in 2020 with a clear vision: to bridge the gap between 
-      creativity and technology. What started as a small group of passionate 
-      developers and designers has grown into a full-fledged digital solutions 
+      Forever was founded in 2020 with a clear vision: to bridge the gap between
+      creativity and technology. What started as a small group of passionate
+      developers and designers has grown into a full-fledged digital solutions
       company trusted by clients across industries.
     </p>
     <p className="leading-relaxed">
-      We specialize in creating modern, responsive, and user-friendly websites 
-      and applications that not only look beautiful but also perform seamlessly. 
-      From e-commerce platforms to corporate websites and custom web apps, we 
-      bring ideas to life with cutting-edge technologies and innovative design 
-      strategies. Every project we take on is backed by thorough research, 
+      We specialize in creating modern, responsive, and user-friendly websites
+      and applications that not only look beautiful but also perform seamlessly.
+      From e-commerce platforms to corporate websites and custom web apps, we
+      bring ideas to life with cutting-edge technologies and innovative design
+      strategies. Every project we take on is backed by thorough research,
       attention to detail, and a relentless pursuit of quality.
     </p>
     <b className="text-gray-900 text-xl">Our Mission</b>
     <p className="leading-relaxed">
-      Our mission is to empower businesses with digital tools that spark growth, 
-      efficiency, and customer engagement. We don’t just deliver products — we 
-      build long-term partnerships with our clients. By combining innovation, 
-      creativity, and technical expertise, we help brands establish a strong 
+      Our mission is to empower businesses with digital tools that spark growth,
+      efficiency, and customer engagement. We don’t just deliver products — we
+      build long-term partnerships with our clients. By combining innovation,
+      creativity, and technical expertise, we help brands establish a strong
       online presence and achieve measurable success.
     </p>
     <p className="leading-relaxed">
-      At Forever, we believe in continuous learning and adapting to the 
-      ever-evolving digital landscape. Whether it’s exploring new design trends, 
-      experimenting with emerging technologies, or refining our processes, we 
+      At Forever, we believe in continuous learning and adapting to the
+      ever-evolving digital landscape. Whether it’s exploring new design trends,
+      experimenting with emerging technologies, or refining our processes, we
       are committed to staying ahead of the curve.
     </p>
   </div>
