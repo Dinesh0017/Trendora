@@ -59,7 +59,15 @@ const addProduct = async (req, res) => {
 
 // Function for list product
 
-const listProduct = async (req, res) => {};
+const listProduct = async (req, res) => {
+    try {
+        const products = await productModel.find({}).sort({date:-1});
+        res.json({ success: true, products });
+    } catch (error) {
+        console.error(error);
+        res.status(500).json({ message: "Internal server error" });
+    }
+};
 
 // Function for remove product
 
