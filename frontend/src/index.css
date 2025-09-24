@@ -19,7 +19,7 @@ a.active hr{
 }
 @media (max-width: 640px) {
 a.active{
-  background-color: black;
+  background-color:oklch(76.9% 0.188 70.08);
   color: white;
 }
 }
