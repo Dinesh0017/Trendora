@@ -83,6 +83,15 @@ const removeProduct = async (req, res) => {
 
 // Function for single product info
 
-const singleProduct = async (req, res) => {};
+const singleProduct = async (req, res) => {
+    try {
+        const product = await productModel.findById(req.body.productId);
+        res.json({ success: true, product });
+
+    } catch (error) {
+        console.error(error);
+        res.status(500).json({ success: false, message: "Internal server error" });
+    }
+};
 
 export { addProduct, listProduct, removeProduct, singleProduct };
