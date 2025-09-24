@@ -65,13 +65,21 @@ const listProduct = async (req, res) => {
         res.json({ success: true, products });
     } catch (error) {
         console.error(error);
-        res.status(500).json({ message: "Internal server error" });
+        res.status(500).json({ success: false, message: "Internal server error" });
     }
 };
 
 // Function for remove product
 
-const removeProduct = async (req, res) => {};
+const removeProduct = async (req, res) => {
+    try {
+        await productModel.findByIdAndDelete(req.body.id);
+        res.json({ success: true, message: "Product removed successfully" });
+    } catch (error) {
+        console.error(error);
+        res.status(500).json({ success: false, message: "Internal server error" });
+    }
+};
 
 // Function for single product info
 
