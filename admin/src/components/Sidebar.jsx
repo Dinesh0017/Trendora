@@ -13,7 +13,7 @@ const Sidebar = () => {
   ];
 
   return (
-    <div className="w-[20%] min-h-screen border-r border-gray-400 bg-white shadow-md ">
+    <div className="w-[20%] min-h-screen border-gray-400 bg-white">
       <div className="flex flex-col gap-4 pt-6  text-[15px]">
         {navLinks.map(({ to, label, icon }) => (
           <NavLink
