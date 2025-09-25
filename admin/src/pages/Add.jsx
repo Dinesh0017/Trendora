@@ -3,6 +3,7 @@ import { assets } from "../assets/adminIcons/assets.js";
 import axios from "axios";
 import {backendUrl} from "../App.jsx"
 import { toast } from "react-toastify";
+import LoadingSpinner from "../components/LoadingSpinner.jsx";
 
 const Add = ({token}) => {
   const [image1, setImage1] = useState(false);
@@ -17,9 +18,11 @@ const Add = ({token}) => {
   const [subCategory, setSubCategory] = useState("Topwear");
   const [bestSeller, setBestseller] = useState(false);
   const [sizes, setSizes] = useState([]);
+  const [isLoading, setIsLoading] = useState(false); // Loading state
 
   const onSubmitHandler = async (e) => {
     e.preventDefault();
+    setIsLoading(true); // Start loading
     try {
       const formData = new FormData();
       image1 && formData.append("image1", image1);
@@ -56,8 +59,11 @@ const Add = ({token}) => {
     } catch (error) {
       console.log("Error while adding product : ", error);
       toast.error("Error while adding product :" , error.message)
+    } finally {
+      setIsLoading(false); // End loading
     }
   };
+
 
   return (
     <div className="flex px-4 bg-gray-50 min-h-screen">
@@ -72,7 +78,7 @@ const Add = ({token}) => {
             {/* Upload Image 1 */}
             <label
               htmlFor="image1"
-              className="flex flex-col items-center justify-center w-24 h-24 border-2 border-dashed border-gray-300 rounded-lg cursor-pointer hover:border-amber-500 transition"
+              className={`flex flex-col items-center justify-center w-24 h-24 border-2 border-dashed border-gray-300 rounded-lg cursor-pointer hover:border-amber-500 transition ${isLoading ? 'opacity-50 cursor-not-allowed' : ''}`}
             >
               <img
                 src={!image1 ? assets.upload_area : URL.createObjectURL(image1)}
@@ -84,13 +90,14 @@ const Add = ({token}) => {
                 id="image1"
                 className="hidden"
                 onChange={(e) => setImage1(e.target.files[0])}
+                disabled={isLoading}
               />
             </label>
 
             {/* Upload Image 2 */}
             <label
               htmlFor="image2"
-              className="flex flex-col items-center justify-center w-24 h-24 border-2 border-dashed border-gray-300 rounded-lg cursor-pointer hover:border-amber-500 transition"
+              className={`flex flex-col items-center justify-center w-24 h-24 border-2 border-dashed border-gray-300 rounded-lg cursor-pointer hover:border-amber-500 transition ${isLoading ? 'opacity-50 cursor-not-allowed' : ''}`}
             >
               <img
                 src={!image2 ? assets.upload_area : URL.createObjectURL(image2)}
@@ -102,13 +109,14 @@ const Add = ({token}) => {
                 id="image2"
                 className="hidden"
                 onChange={(e) => setImage2(e.target.files[0])}
+                disabled={isLoading}
               />
             </label>
 
             {/* Upload Image 3 */}
             <label
               htmlFor="image3"
-              className="flex flex-col items-center justify-center w-24 h-24 border-2 border-dashed border-gray-300 rounded-lg cursor-pointer hover:border-amber-500 transition"
+              className={`flex flex-col items-center justify-center w-24 h-24 border-2 border-dashed border-gray-300 rounded-lg cursor-pointer hover:border-amber-500 transition ${isLoading ? 'opacity-50 cursor-not-allowed' : ''}`}
             >
               <img
                 src={!image3 ? assets.upload_area : URL.createObjectURL(image3)}
@@ -120,13 +128,14 @@ const Add = ({token}) => {
                 id="image3"
                 className="hidden"
                 onChange={(e) => setImage3(e.target.files[0])}
+                disabled={isLoading}
               />
             </label>
 
             {/* Upload Image 4 */}
             <label
               htmlFor="image4"
-              className="flex flex-col items-center justify-center w-24 h-24 border-2 border-dashed border-gray-300 rounded-lg cursor-pointer hover:border-amber-500 transition"
+              className={`flex flex-col items-center justify-center w-24 h-24 border-2 border-dashed border-gray-300 rounded-lg cursor-pointer hover:border-amber-500 transition ${isLoading ? 'opacity-50 cursor-not-allowed' : ''}`}
             >
               <img
                 src={!image4 ? assets.upload_area : URL.createObjectURL(image4)}
@@ -138,6 +147,7 @@ const Add = ({token}) => {
                 id="image4"
                 className="hidden"
                 onChange={(e) => setImage4(e.target.files[0])}
+                disabled={isLoading}
               />
             </label>
           </div>
@@ -153,6 +163,7 @@ const Add = ({token}) => {
             required
             onChange={(e) => setName(e.target.value)}
             value={name}
+            disabled={isLoading}
           />
         </div>
 
@@ -166,6 +177,7 @@ const Add = ({token}) => {
             required
             onChange={(e) => setDescription(e.target.value)}
             value={description}
+            disabled={isLoading}
           />
         </div>
 
@@ -177,6 +189,7 @@ const Add = ({token}) => {
               className="w-full border border-gray-300 rounded-md px-3 py-2 text-sm sm:text-base focus:outline-none focus:ring-2 focus:ring-amber-500"
               onChange={(e) => setCategory(e.target.value)}
               value={category}
+              disabled={isLoading}
             >
               <option value="Men">Men</option>
               <option value="Women">Women</option>
@@ -193,6 +206,7 @@ const Add = ({token}) => {
               onChange={(e) => setSubCategory(e.target.value)}
               value={subCategory}
               required
+              disabled={isLoading}
             >
               <option value="Topwear">Topwear</option>
               <option value="Bottomwear">Bottomwear</option>
@@ -211,6 +225,7 @@ const Add = ({token}) => {
             required
             onChange={(e) => setPrice(e.target.value)}
             value={price}
+            disabled={isLoading}
           />
         </div>
 
@@ -221,7 +236,7 @@ const Add = ({token}) => {
             {["XS", "S", "M", "L", "XL", "XXL"].map((size) => (
               <label
                 key={size}
-                className="flex items-center gap-2 cursor-pointer select-none"
+                className={`flex items-center gap-2 cursor-pointer select-none ${isLoading ? 'opacity-50 cursor-not-allowed' : ''}`}
               >
                 <input
                   type="checkbox"
@@ -234,6 +249,7 @@ const Add = ({token}) => {
                     )
                   }
                   checked={sizes.includes(size)}
+                  disabled={isLoading}
                 />
                 <span
                   className={`text-sm text-gray-700 ${
@@ -246,18 +262,20 @@ const Add = ({token}) => {
             ))}
           </div>
         </div>
+        
         {/* Best Seller */}
-        <div className="flex items-center gap-2">
+        <div className={`flex items-center gap-2 ${isLoading ? 'opacity-50' : ''}`}>
           <input
             type="checkbox"
             id="bestSeller"
             className="h-4 w-4 accent-amber-500 border-gray-300 rounded focus:ring-2 focus:ring-amber-400 cursor-pointer"
             onChange={() => setBestseller((prev) => !prev)}
             checked={bestSeller}
+            disabled={isLoading}
           />
           <label
             htmlFor="bestSeller"
-            className="text-sm text-gray-700 cursor-pointer select-none"
+            className={`text-sm text-gray-700 cursor-pointer select-none ${isLoading ? 'cursor-not-allowed' : ''}`}
           >
             Mark as Best Seller
           </label>
@@ -266,9 +284,14 @@ const Add = ({token}) => {
         {/* Submit Button */}
         <button
           type="submit"
-          className="w-full bg-amber-500 text-white font-medium rounded-md px-4 py-2 mt-2 hover:bg-amber-600 transition-colors duration-300 shadow-md hover:shadow-lg cursor-pointer"
+          className={`w-full font-medium rounded-md px-4 py-2 mt-2 transition-colors duration-300 shadow-md hover:shadow-lg ${
+            isLoading
+              ? 'bg-gray-400 cursor-not-allowed'
+              : 'bg-amber-500 text-white hover:bg-amber-600 cursor-pointer'
+          }`}
+          disabled={isLoading}
         >
-          Add Product
+          {isLoading ? <LoadingSpinner /> : 'Add Product'}
         </button>
       </form>
     </div>
