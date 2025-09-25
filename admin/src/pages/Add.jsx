@@ -16,7 +16,7 @@ const Add = ({token}) => {
   const [price, setPrice] = useState("");
   const [category, setCategory] = useState("Men");
   const [subCategory, setSubCategory] = useState("Topwear");
-  const [bestSeller, setBestseller] = useState(false);
+  const [bestseller, setBestseller] = useState(false);
   const [sizes, setSizes] = useState([]);
   const [isLoading, setIsLoading] = useState(false); // Loading state
 
@@ -35,7 +35,7 @@ const Add = ({token}) => {
       formData.append("price", price);
       formData.append("category", category);
       formData.append("subCategory", subCategory);
-      formData.append("bestSeller", bestSeller);
+      formData.append("bestseller", bestseller);
       formData.append("sizes", JSON.stringify(sizes));
 
       const response = await axios.post(backendUrl + "/api/product/add", formData,{headers:{token}})
@@ -270,11 +270,11 @@ const Add = ({token}) => {
             id="bestSeller"
             className="h-4 w-4 accent-amber-500 border-gray-300 rounded focus:ring-2 focus:ring-amber-400 cursor-pointer"
             onChange={() => setBestseller((prev) => !prev)}
-            checked={bestSeller}
+            checked={bestseller}
             disabled={isLoading}
           />
           <label
-            htmlFor="bestSeller"
+            htmlFor="bestseller"
             className={`text-sm text-gray-700 cursor-pointer select-none ${isLoading ? 'cursor-not-allowed' : ''}`}
           >
             Mark as Best Seller
@@ -291,7 +291,7 @@ const Add = ({token}) => {
           }`}
           disabled={isLoading}
         >
-          {isLoading ? <LoadingSpinner /> : 'Add Product'}
+          {isLoading ? <LoadingSpinner message="Uploading..."/> : 'Add Product'}
         </button>
       </form>
     </div>
