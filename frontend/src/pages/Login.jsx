@@ -1,10 +1,56 @@
-import React, { useState } from "react";
+import React, { useContext, useState } from "react";
+import { ShopContext } from "../context/ShopContext";
+import axios from "axios";
+import { toast } from "react-toastify";
+import LoadingSpinner from "../components/LoadingSpinner";
 
 const Login = () => {
   const [currentState, setCurrentState] = useState("Sign Up");
+  const { token, setToken, navigate, backendUrl } = useContext(ShopContext);
+
+  const [name, setName] = useState("");
+  const [password, setPassword] = useState("");
+  const [email, setEmail] = useState("");
+  const [isLoading, setIsLoading] = useState(false);
 
   const onSubmitHandler = async (event) => {
     event.preventDefault();
+    setIsLoading(true);
+    try {
+      if (currentState === "Sign Up") {
+        const response = await axios.post(backendUrl + "/api/user/register", {
+          name,
+          email,
+          password,
+        });
+        if (response.data.success) {
+          setToken(response.data.token);
+          localStorage.setItem("token", response.data.token);
+          toast.success("Registration successful!");
+          navigate("/");
+        } else {
+          toast.error(response.data.message);
+        }
+      } else {
+        const response = await axios.post(backendUrl + "/api/user/login", {
+          email,
+          password,
+        });
+        if (response.data.success) {
+          setToken(response.data.token);
+          localStorage.setItem("token", response.data.token);
+          toast.success("Login successful!");
+          navigate("/");
+        } else {
+          toast.error(response.data.message);
+        }
+      }
+    } catch (error) {
+      console.log("Error during authentication:", error);
+      toast.error("An error occurred. Please try again.");
+    } finally {
+      setIsLoading(false); // ✅ stop loading
+    }
   };
 
   return (
@@ -27,6 +73,9 @@ const Login = () => {
           placeholder="Name"
           className="w-full border border-gray-300 rounded-md px-3 py-2 text-sm sm:text-base focus:outline-none focus:ring-2 focus:ring-amber-500"
           required
+          onChange={(e) => setName(e.target.value)}
+          value={name}
+          disabled={isLoading}
         />
       )}
       <input
@@ -34,12 +83,18 @@ const Login = () => {
         placeholder="Email"
         className="w-full border border-gray-300 rounded-md px-3 py-2 text-sm sm:text-base focus:outline-none focus:ring-2 focus:ring-amber-500"
         required
+        onChange={(e) => setEmail(e.target.value)}
+        value={email}
+        disabled={isLoading}
       />
       <input
         type="password"
         placeholder="Password"
         className="w-full border border-gray-300 rounded-md px-3 py-2 text-sm sm:text-base focus:outline-none focus:ring-2 focus:ring-amber-500"
         required
+        onChange={(e) => setPassword(e.target.value)}
+        value={password}
+        disabled={isLoading}
       />
 
       {/* Links */}
@@ -65,8 +120,18 @@ const Login = () => {
       </div>
 
       {/* Button */}
-      <button className="w-full bg-amber-500 text-white font-medium rounded-md px-3 py-2 mt-4 hover:bg-amber-600 transition-colors duration-300 cursor-pointer">
-        {currentState === "Login" ? "Login" : "Sign Up"}
+      <button
+        type="submit"
+        className="w-full bg-amber-500 text-white font-medium rounded-md px-3 py-2 mt-4 hover:bg-amber-600 transition-colors duration-300 cursor-pointer disabled:opacity-50 disabled:cursor-not-allowed flex items-center justify-center"
+        disabled={isLoading}
+      >
+        {isLoading ? (
+          <LoadingSpinner message={currentState === "Login" ? "Logging in..." : "Signing up..."} />
+        ) : currentState === "Login" ? (
+          "Login"
+        ) : (
+          "Sign Up"
+        )}
       </button>
     </form>
   );
