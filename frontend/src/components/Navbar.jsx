@@ -62,7 +62,7 @@ const Navbar = () => {
         />
 
         {/* Profile Dropdown */}
-        <div className="group relative">
+        <div className="group relative z-50">
           <Link to='/login'>
             <img
               src={assets.profile_icon}

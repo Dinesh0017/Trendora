@@ -1,4 +1,4 @@
-import React, { useContext, useState } from "react";
+import React, { useContext, useEffect, useState } from "react";
 import { ShopContext } from "../context/ShopContext";
 import axios from "axios";
 import { toast } from "react-toastify";
@@ -25,9 +25,8 @@ const Login = () => {
         });
         if (response.data.success) {
           setToken(response.data.token);
-          localStorage.setItem("token", response.data.token);
+          localStorage.setItem('token', response.data.token);
           toast.success("Registration successful!");
-          navigate("/");
         } else {
           toast.error(response.data.message);
         }
@@ -38,9 +37,8 @@ const Login = () => {
         });
         if (response.data.success) {
           setToken(response.data.token);
-          localStorage.setItem("token", response.data.token);
+          localStorage.setItem('token', response.data.token);
           toast.success("Login successful!");
-          navigate("/");
         } else {
           toast.error(response.data.message);
         }
@@ -49,9 +47,14 @@ const Login = () => {
       console.log("Error during authentication:", error);
       toast.error("An error occurred. Please try again.");
     } finally {
-      setIsLoading(false); // ✅ stop loading
+      setIsLoading(false);
     }
   };
+  useEffect(() => {
+    if (token) {
+      navigate("/");
+    }
+  }, [token]);
 
   return (
     <form
