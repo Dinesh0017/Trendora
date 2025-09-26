@@ -74,7 +74,7 @@ const Collection = () => {
   // Run filter whenever category/subCategory changes
   useEffect(() => {
     applyFilter()
-  },[category,subCategory,search,showSearch]);
+  },[category,subCategory,search,showSearch,products]);
 
   // Run sorting whenever sort type changes
   useEffect(() => {

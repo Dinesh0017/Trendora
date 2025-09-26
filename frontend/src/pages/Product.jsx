@@ -8,14 +8,14 @@ const Product = () => {
   const { productId } = useParams();
   const { products, currency, addToCart } = useContext(ShopContext);
   const [productData, setProductData] = useState(false);
-  const [image, setImage] = useState("");
+  const [images, setImages] = useState("");
   const [size, setSize] = useState("");
 
   const fetchProductData = async () => {
     products.map((item) => {
       if (item._id === productId) {
         setProductData(item);
-        setImage(item.image[0]);
+        setImages(item.images[0]);
         return null;
       }
     });
@@ -34,7 +34,7 @@ const Product = () => {
           {/* Big Image */}
           <div className="w-full sm:w-[80%]">
             <img
-              src={image}
+              src={images}
               alt={productData.name}
               className="w-full h-auto rounded-xl shadow-md"
             />
@@ -42,13 +42,13 @@ const Product = () => {
 
           {/* Small Thumbnails BELOW */}
           <div className="flex gap-3 mt-4 overflow-x-auto justify-center p-2">
-            {productData.image.map((item, index) => (
+            {productData.images.map((item, index) => (
               <img
                 key={index}
                 src={item}
                 alt={productData.name}
                 className={`min-w-[70px] h-[70px] sm:min-w-[80px] sm:h-[80px] md:min-w-[90px] md:h-[90px] object-cover rounded-lg cursor-pointer border-2 transition-all duration-300 ${
-                  item === image
+                  item === images
                     ? "border-amber-500 scale-105"
                     : "border-gray-200 hover:border-gray-400"
                 }`}
