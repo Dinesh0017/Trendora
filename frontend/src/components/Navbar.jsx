@@ -12,7 +12,21 @@ const navLinks = [
 
 const Navbar = () => {
   const [visible, setVisible] = useState(false);
-  const { setShowSearch, getCartCount } = useContext(ShopContext);
+  const {
+    setShowSearch,
+    getCartCount,
+    navigate,
+    token,
+    setToken,
+    setCartItems,
+  } = useContext(ShopContext);
+
+  const logout = () => {
+    navigate("/login");
+    localStorage.removeItem("token");
+    setToken("");
+    setCartItems({});
+  };
 
   return (
     <div className="flex items-center justify-between py-5 font-medium relative ">
@@ -63,22 +77,29 @@ const Navbar = () => {
 
         {/* Profile Dropdown */}
         <div className="group relative z-50">
-          <Link to='/login'>
-            <img
-              src={assets.profile_icon}
-              alt="User"
-              className="w-5 cursor-pointer"
-            />
-          </Link>
-          <div className="absolute right-0 hidden group-hover:block bg-white shadow-lg rounded-lg pt-4">
-            <ul className="flex flex-col gap-2 w-36 py-3 px-5 bg-slate-100 text-gray-500 rounded">
-              <li className="cursor-pointer hover:text-amber-500">
-                My Profile
-              </li>
-              <li className="cursor-pointer hover:text-amber-500">Orders</li>
-              <li className="cursor-pointer hover:text-amber-500">Logout</li>
-            </ul>
-          </div>
+          <img
+            src={assets.profile_icon}
+            alt="User"
+            className="w-5 cursor-pointer"
+            onClick={() => (token ? null : navigate("/login"))}
+          />
+          {/*Drop Down */}
+          {token && (
+            <div className="absolute right-0 hidden group-hover:block bg-white shadow-lg rounded-lg pt-4">
+              <ul className="flex flex-col gap-2 w-36 py-3 px-5 bg-slate-100 text-gray-500 rounded">
+                <li className="cursor-pointer hover:text-amber-500">
+                  My Profile
+                </li>
+                <li className="cursor-pointer hover:text-amber-500">Orders</li>
+                <li
+                  onClick={logout}
+                  className="cursor-pointer hover:text-amber-500"
+                >
+                  Logout
+                </li>
+              </ul>
+            </div>
+          )}
         </div>
 
         {/* Cart */}
