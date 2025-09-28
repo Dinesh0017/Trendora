@@ -1,4 +1,5 @@
-import userModel from "../models/userModel";
+import userModel from "../models/userModel.js";
+
 
 // add products to user cart
 const addToCart = async (req, res) => {
@@ -50,8 +51,18 @@ const updateCart = async (req, res) => {
 
 //get user cart data
 const getUserCart = async (req, res) => {
-     
+     try {
+        const { userId } = req.body;
+        
+        const userData = await userModel.findById(userId);
+        let cartData = await userData.cartData;
+
+        res.status(200).json({message: "User cart data fetched", success: true, cartData});
+     } catch (error) {
+        console.log(error);
+        res.status(500).json({message: "Internal server error", success: false});
+     }
 }
 
 
-export { addToCart, updateCart, getUserCart }
+export  { addToCart, updateCart, getUserCart }
