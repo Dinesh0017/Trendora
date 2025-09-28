@@ -20,8 +20,9 @@ const addToCart = async (req, res) => {
             cartData[itemId][size] = 1;
         }
 
-        await userModel.findByIdAndUpdate(userId, {cartData});\
+        await userModel.findByIdAndUpdate(userId, {cartData});
         res.status(200).json({message: "Item added to cart", success: true});
+
      } catch (error) {
         console.log(error);
         res.status(500).json({message: "Internal server error", success: false});
@@ -30,7 +31,21 @@ const addToCart = async (req, res) => {
 
 // update user cart
 const updateCart = async (req, res) => {
-     
+     try {
+        const { userId,itemId, size, quantity} = req.body;
+
+        const userData = await userModel.findById(userId);
+        let cartData = await userData.cartData;
+
+        cartData[itemId][size] = quantity;
+
+        await userModel.findByIdAndUpdate(userId, {cartData});
+        res.status(200).json({message: "Cart Updated", success: true});
+
+     } catch (error) {
+        console.log(error);
+        res.status(500).json({message: "Internal server error", success: false});
+     }
 }
 
 //get user cart data
