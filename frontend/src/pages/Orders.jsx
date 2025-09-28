@@ -1,5 +1,5 @@
 import React, { useContext } from "react";
-import { ShopContext } from "../context/shopContext";
+import { ShopContext } from "../context/ShopContext.jsx";
 import Title from "../components/Title";
 
 const Orders = () => {
@@ -23,7 +23,7 @@ const Orders = () => {
             <div className="flex items-start gap-5">
               {/* Product Image */}
               <img
-                src={item.image[0]}
+                src={item.images[0]}
                 alt={item.name}
                 className="w-16 sm:w-24 sm:h-24 object-cover rounded-lg "
               />

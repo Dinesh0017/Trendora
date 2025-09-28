@@ -90,7 +90,12 @@ const Navbar = () => {
                 <li className="cursor-pointer hover:text-amber-500">
                   My Profile
                 </li>
-                <li className="cursor-pointer hover:text-amber-500">Orders</li>
+                <li
+                  className="cursor-pointer hover:text-amber-500"
+                  onClick={() => navigate("/orders")}
+                >
+                  Orders
+                </li>
                 <li
                   onClick={logout}
                   className="cursor-pointer hover:text-amber-500"

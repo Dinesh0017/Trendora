@@ -1,0 +1,42 @@
+import userModel from "../models/userModel";
+
+// add products to user cart
+const addToCart = async (req, res) => {
+     try {
+        const { userId, itemId, size } = req.body;
+
+        // logic to add item to cart
+        const userData = await userModel.findById(userId);
+        let cartData = await userData.cartData;
+
+        if(cartData[itemId]){
+            if(cartData[itemId][size]){
+                cartData[itemId][size] += 1;
+            }else{
+                cartData[itemId][size] = 1;
+            }
+        }else{
+            cartData[itemId] = {};
+            cartData[itemId][size] = 1;
+        }
+
+        await userModel.findByIdAndUpdate(userId, {cartData});\
+        res.status(200).json({message: "Item added to cart", success: true});
+     } catch (error) {
+        console.log(error);
+        res.status(500).json({message: "Internal server error", success: false});
+     }
+}
+
+// update user cart
+const updateCart = async (req, res) => {
+     
+}
+
+//get user cart data
+const getUserCart = async (req, res) => {
+     
+}
+
+
+export { addToCart, updateCart, getUserCart }
