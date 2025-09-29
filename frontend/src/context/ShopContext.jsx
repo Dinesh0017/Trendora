@@ -4,11 +4,12 @@ import { useNavigate } from "react-router-dom";
 import axios from "axios";
 
 
+
 export const ShopContext = createContext();
 
 const ShopContextProvider = (props) => {
   const currency = "$";
-  const delivery_free = 10;
+  const delivery_fee = 10;
   const backendUrl = import.meta.env.VITE_BACKEND_URL;
 
   const [search, setSearch] = useState("");
@@ -140,7 +141,7 @@ const getUserCart = async (token) => {
   const value = {
     products,
     currency,
-    delivery_free,
+    delivery_fee,
     search,
     setSearch,
     showSearch,
@@ -153,6 +154,7 @@ const getUserCart = async (token) => {
     navigate,
     backendUrl,
     setToken,token,
+    setCartItems,
   };
 
   return (
