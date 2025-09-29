@@ -42,7 +42,16 @@ const allOrders = async(req, res) => {}
 
 
 //User order data for frontend
-const userOrders = async(req, res) => {}
+const userOrders = async(req, res) => {
+    try {
+        const { userId } = req.body;
+        const orders = await orderModel.find({ userId });
+        res.status(200).json({ orders, success: true, message: "User orders fetched successfully" });
+    } catch (error) {
+        console.log(error);
+        res.status(500).json({ message: "Error fetching user orders", success: false });
+    }
+}
 
 
 //update order status from admin panel

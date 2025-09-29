@@ -34,8 +34,8 @@ const productSchema = new mongoose.Schema(
             type: Boolean,
         },
         date: {
-            type: Date,
-            default: Date.now,
+            type: Number,
+            default: Date.now(),
         }
     }
 );

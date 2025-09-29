@@ -52,7 +52,7 @@ const Product = () => {
                     ? "border-amber-500 scale-105"
                     : "border-gray-200 hover:border-gray-400"
                 }`}
-                onClick={() => setImage(item)}
+                onClick={() => setImages(item)}
               />
             ))}
           </div>
@@ -87,7 +87,7 @@ const Product = () => {
           <div className="flex flex-col gap-4 my-8">
             <p className="font-medium text-slate-800">Select Size</p>
             <div className="flex gap-2 flex-wrap">
-              {productData.sizes.map((item, index) => (
+              {productData.sizes.slice().reverse().map((item, index) => (
                 <button
                   onClick={() => setSize(item)}
                   key={index}
