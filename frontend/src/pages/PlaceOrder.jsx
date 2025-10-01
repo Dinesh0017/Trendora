@@ -34,7 +34,7 @@ const PlaceOrder = () => {
   const onChangeHandler = (event) => {
     const name = event.target.name;
     const value = event.target.value;
-    setFormData(data => ({ ...data, [name]: value }));
+    setFormData((data) => ({ ...data, [name]: value }));
   };
 
   const onSubmitHandler = async (event) => {
@@ -65,16 +65,28 @@ const PlaceOrder = () => {
       switch (method) {
         //api calls for COD
         case "cod":
-          const response = await axios.post( backendUrl + "/api/order/place", orderData,{headers:{token}} )
+          const response = await axios.post(
+            backendUrl + "/api/order/place",
+            orderData,
+            { headers: { token } }
+          );
           console.log(response.data.success);
           if (response.data.success) {
             setCartItems({});
             navigate("/orders");
-          }else{
+          } else {
             toast.error(response.data.message);
           }
           break;
-
+        case "stripe":
+          const responseStripe = await axios.post(backendUrl + "/api/order/stripe", orderData, { headers: { token } });
+          if (responseStripe.data.success) {
+            const { session_url } = responseStripe.data;
+            window.location.replace(session_url);
+          } else {
+            toast.error(responseStripe.data.message);
+          }
+          break;
         default:
           break;
       }
@@ -82,7 +94,10 @@ const PlaceOrder = () => {
   };
 
   return (
-    <form onSubmit={onSubmitHandler} className="flex flex-col lg:flex-row justify-between gap-10 pt-6 lg:pt-14 min-h-[80vh] border-t border-gray-300 px-4 sm:px-8">
+    <form
+      onSubmit={onSubmitHandler}
+      className="flex flex-col lg:flex-row justify-between gap-10 pt-6 lg:pt-14 min-h-[80vh] border-t border-gray-300 px-4 sm:px-8"
+    >
       {/* Left Side - Delivery Info */}
       <div className="flex flex-col gap-4 w-full lg:max-w-[500px] bg-white p-6 rounded-xl shadow-md">
         <div className="text-xl sm:text-2xl mb-2 mt-2">

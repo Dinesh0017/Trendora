@@ -3,30 +3,40 @@ import { ShopContext } from "../context/ShopContext";
 import Title from "../components/Title";
 import { assets } from "../assets/images/assets";
 import CartTotal from "../components/CartTotal";
+import LoadingSpinner from "../components/LoadingSpinner"; // ✅ Import spinner
 
 const Cart = () => {
   const { products, currency, cartItems, updateQuantity, navigate } =
     useContext(ShopContext);
   const [cartData, setCartData] = useState([]);
+  const [loading, setLoading] = useState(false); // ✅ Spinner state
 
   useEffect(() => {
-    if (products.length > 0){
+    if (products.length > 0) {
       const tempData = [];
-    for (const items in cartItems) {
-      for (const item in cartItems[items]) {
-        if (cartItems[items][item] > 0) {
-          tempData.push({
-            _id: items,
-            size: item,
-            quantity: cartItems[items][item],
-          });
+      for (const items in cartItems) {
+        for (const item in cartItems[items]) {
+          if (cartItems[items][item] > 0) {
+            tempData.push({
+              _id: items,
+              size: item,
+              quantity: cartItems[items][item],
+            });
+          }
         }
       }
+      setCartData(tempData);
     }
-        setCartData(tempData);
-    }
-
   }, [cartItems, products]);
+
+  // ✅ Checkout Handler with spinner
+  const handleCheckout = () => {
+    setLoading(true);
+    setTimeout(() => {
+      navigate("/place-order");
+      setLoading(false);
+    }, 1500);
+  };
 
   return (
     <div className="pt-10 px-4 sm:px-8 lg:px-16">
@@ -108,8 +118,21 @@ const Cart = () => {
 
         {/* Checkout Button */}
         <div className="w-full sm:w-auto">
-          <button onClick={() => navigate("/place-order")} className="bg-amber-500 hover:bg-amber-600 cursor-pointer text-white text-base font-semibold tracking-wide rounded-xl shadow-md transition-all duration-300 px-8 py-3 w-full sm:w-auto">
-            PROCEED TO CHECKOUT
+          <button
+            onClick={handleCheckout}
+            disabled={loading}
+            className={`flex items-center justify-center gap-2 bg-amber-500 hover:bg-amber-600 cursor-pointer text-white text-base font-semibold tracking-wide rounded-xl shadow-md transition-all duration-300 px-8 py-3 w-full sm:w-auto ${
+              loading ? "opacity-70 cursor-not-allowed" : ""
+            }`}
+          >
+            {loading ? (
+              <>
+                <LoadingSpinner className="w-5 h-5 border-2 border-white border-t-transparent rounded-full animate-spin" />
+                Processing...
+              </>
+            ) : (
+              "PROCEED TO CHECKOUT"
+            )}
           </button>
         </div>
       </div>
