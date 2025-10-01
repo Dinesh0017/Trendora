@@ -25,6 +25,18 @@ const Orders = ({ token }) => {
     }
   };
 
+  const statusHandler = async (event, orderId) => {
+    try {
+      const response = await axios.post(backendUrl + "/api/order/status",{ orderId, status: event.target.value },{ headers: { token } });
+      if (response.data.success) {
+        await fetchAllOrders();
+      }
+    } catch (error) {
+      console.log(error);
+      toast.error("Error updating order status");
+    }
+  }
+
   useEffect(() => {
     fetchAllOrders();
   }, []);
@@ -38,7 +50,7 @@ const Orders = ({ token }) => {
       {orders.length === 0 ? (
         <p className="text-gray-500 text-center">No orders available.</p>
       ) : (
-        <div className="grid gap-6 md:grid-cols-2 lg:grid-cols-3">
+        <div className="grid gap-6 md:grid-cols-2 lg:grid-cols-3 ">
           {orders.map((order, index) => (
             <div
               key={index}
@@ -125,6 +137,8 @@ const Orders = ({ token }) => {
                 <select
                   defaultValue={order.status || "Order Placed"}
                   className="border rounded-xl px-3 py-1.5 text-sm font-medium bg-gray-50 hover:bg-gray-100 cursor-pointer focus:ring-2"
+                  value={order.status}
+                  onChange={(e) => statusHandler(e, order._id)}
                 >
                   <option value="Order Placed">Order Placed</option>
                   <option value="Packing">Packing</option>
