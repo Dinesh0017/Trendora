@@ -5,9 +5,11 @@ import { assets } from "../assets/images/assets";
 import { ShopContext } from "../context/ShopContext";
 import axios from "axios";
 import { toast } from "react-toastify";
+import LoadingSpinner from "../components/LoadingSpinner"; // ✅ import spinner
 
 const PlaceOrder = () => {
   const [method, setMethod] = useState("cod");
+  const [loading, setLoading] = useState(false); // ✅ track loading
   const {
     navigate,
     backendUrl,
@@ -39,7 +41,7 @@ const PlaceOrder = () => {
 
   const onSubmitHandler = async (event) => {
     event.preventDefault();
-    // Handle form submission logic here
+    setLoading(true);
     try {
       let orderItems = [];
       for (const items in cartItems) {
@@ -63,14 +65,12 @@ const PlaceOrder = () => {
       };
 
       switch (method) {
-        //api calls for COD
         case "cod":
           const response = await axios.post(
             backendUrl + "/api/order/place",
             orderData,
             { headers: { token } }
           );
-          console.log(response.data.success);
           if (response.data.success) {
             setCartItems({});
             navigate("/orders");
@@ -78,19 +78,30 @@ const PlaceOrder = () => {
             toast.error(response.data.message);
           }
           break;
+
         case "stripe":
-          const responseStripe = await axios.post(backendUrl + "/api/order/stripe", orderData, { headers: { token } });
+          const responseStripe = await axios.post(
+            backendUrl + "/api/order/stripe",
+            orderData,
+            { headers: { token } }
+          );
           if (responseStripe.data.success) {
             const { session_url } = responseStripe.data;
             window.location.replace(session_url);
+            
           } else {
             toast.error(responseStripe.data.message);
           }
           break;
+
         default:
           break;
       }
-    } catch (error) {}
+    } catch (error) {
+      toast.error("Something went wrong!");
+    } finally {
+      setLoading(false);
+    }
   };
 
   return (
@@ -124,6 +135,7 @@ const PlaceOrder = () => {
             required
           />
         </div>
+
         <input
           type="email"
           placeholder="Email Address"
@@ -133,6 +145,7 @@ const PlaceOrder = () => {
           value={formData.email}
           required
         />
+
         <input
           type="text"
           placeholder="Street"
@@ -142,6 +155,7 @@ const PlaceOrder = () => {
           value={formData.street}
           required
         />
+
         <div className="flex gap-3">
           <input
             type="text"
@@ -162,6 +176,7 @@ const PlaceOrder = () => {
             required
           />
         </div>
+
         <div className="flex gap-3">
           <input
             type="number"
@@ -182,6 +197,7 @@ const PlaceOrder = () => {
             required
           />
         </div>
+
         <input
           type="number"
           placeholder="Phone Number"
@@ -195,15 +211,14 @@ const PlaceOrder = () => {
 
       {/* Right Side - Cart & Payment */}
       <div className="flex-1 flex flex-col gap-10">
-        {/* Cart Summary */}
         <div className="bg-white ">
           <CartTotal />
         </div>
 
-        {/* Payment Method */}
         <div className="bg-white p-6 rounded-xl shadow-md text-2xl">
           <Title text1={"PAYMENT "} text2={"METHOD"} />
 
+          {/* Payment Options */}
           <div className="flex flex-col gap-3 mt-4">
             {/* Stripe */}
             <div
@@ -272,10 +287,11 @@ const PlaceOrder = () => {
           {/* Place Order Button */}
           <div className="w-full text-right mt-8">
             <button
-              className="bg-amber-500 hover:bg-amber-600 text-white px-12 py-3 text-sm font-semibold rounded-lg shadow-md transition-all"
+              className="bg-amber-500 hover:bg-amber-600 text-white px-12 py-3 text-sm font-semibold rounded-lg shadow-md transition-all flex items-center justify-center gap-2 disabled:opacity-60 disabled:cursor-not-allowed cursor-pointer"
               type="submit"
+              disabled={loading}
             >
-              PLACE ORDER
+              {loading ? <LoadingSpinner message="Processing..." /> : "PLACE ORDER"}
             </button>
           </div>
         </div>

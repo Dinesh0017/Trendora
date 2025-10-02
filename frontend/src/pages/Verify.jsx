@@ -25,6 +25,7 @@ const Verify = () => {
         );
         if (response.data.success) {
           // Payment was successful
+          setCartItems({});
           navigate("/orders");
         } else {
           // Payment failed

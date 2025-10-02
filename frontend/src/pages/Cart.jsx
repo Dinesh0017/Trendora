@@ -3,13 +3,13 @@ import { ShopContext } from "../context/ShopContext";
 import Title from "../components/Title";
 import { assets } from "../assets/images/assets";
 import CartTotal from "../components/CartTotal";
-import LoadingSpinner from "../components/LoadingSpinner"; // ✅ Import spinner
+import LoadingSpinner from "../components/LoadingSpinner";
 
 const Cart = () => {
   const { products, currency, cartItems, updateQuantity, navigate } =
     useContext(ShopContext);
   const [cartData, setCartData] = useState([]);
-  const [loading, setLoading] = useState(false); // ✅ Spinner state
+  const [loading, setLoading] = useState(false);
 
   useEffect(() => {
     if (products.length > 0) {
@@ -29,7 +29,7 @@ const Cart = () => {
     }
   }, [cartItems, products]);
 
-  // ✅ Checkout Handler with spinner
+  // Checkout Handler with spinner
   const handleCheckout = () => {
     setLoading(true);
     setTimeout(() => {
