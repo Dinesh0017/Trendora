@@ -39,7 +39,7 @@ const Orders = () => {
   },[token])
 
   return (
-    <div className=" pt-16 px-4 sm:px-6 lg:px-8 mb-8">
+    <div className="border-t pt-16 px-4 sm:px-6 lg:px-8 mb-8">
       {/* Section Title */}
       <div className="text-2xl  mb-4 text-gray-800">
         <Title text1={"MY "} text2={"ORDERS"} />
